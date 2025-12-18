@@ -27,4 +27,4 @@ This project displays an **animated 2D city scenery** using **OpenGL (GLUT)** an
 The output demonstrates an interactive and animated city scene combining graphics algorithms, transformations, and user interaction.
 
 ## Author
-(Your Name)
+Aong Sing Marma
