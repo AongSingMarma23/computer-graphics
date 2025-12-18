@@ -1,90 +1,12 @@
-//Home
 /*#include <GL/glut.h>
 
-void drawHome()
-{
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    // House Base
-    glColor3f(0.6, 0.3, 0.0);
-    glBegin(GL_POLYGON);
-    glVertex2f(100, 100);
-    glVertex2f(300, 100);
-    glVertex2f(300, 250);
-    glVertex2f(100, 250);
-    glEnd();
-
-    // Roof
-    glColor3f(1.0, 0.0, 0.0);
-    glBegin(GL_TRIANGLES);
-    glVertex2f(90, 250);
-    glVertex2f(310, 250);
-    glVertex2f(200, 350);
-    glEnd();
-
-    // Door
-    glColor3f(0.3, 0.2, 0.1);
-    glBegin(GL_POLYGON);
-    glVertex2f(170, 100);
-    glVertex2f(230, 100);
-    glVertex2f(230, 180);
-    glVertex2f(170, 180);
-    glEnd();
-
-    // Left Window
-    glColor3f(0.0, 0.0, 1.0);
-    glBegin(GL_POLYGON);
-    glVertex2f(120, 170);
-    glVertex2f(160, 170);
-    glVertex2f(160, 210);
-    glVertex2f(120, 210);
-    glEnd();
-
-    // Right Window
-    glBegin(GL_POLYGON);
-    glVertex2f(240, 170);
-    glVertex2f(280, 170);
-    glVertex2f(280, 210);
-    glVertex2f(240, 210);
-    glEnd();
-
-    glFlush();
-}
-
-void init()
-{
-    glClearColor(1.0, 1.0, 1.0, 1.0);
-    gluOrtho2D(0, 400, 0, 400);
-}
-
-int main(int argc, char** argv)
-{
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-    glutInitWindowSize(500, 500);
-    glutCreateWindow("Draw a Home - OpenGL");
-    init();
-    glutDisplayFunc(drawHome);
-    glutMainLoop();
-    return 0;
-}*/
-
-//Stars
-#include <GL/glut.h>
-
-void drawStar(float x, float y)
+void drawSquare(float x, float y, float size)
 {
     glBegin(GL_POLYGON);
-    glVertex2f(x,     y + 30);
-    glVertex2f(x + 10, y + 10);
-    glVertex2f(x + 30, y + 10);
-    glVertex2f(x + 15, y - 5);
-    glVertex2f(x + 20, y - 30);
-    glVertex2f(x,     y - 15);
-    glVertex2f(x - 20, y - 30);
-    glVertex2f(x - 15, y - 5);
-    glVertex2f(x - 30, y + 10);
-    glVertex2f(x - 10, y + 10);
+    glVertex2f(x, y);
+    glVertex2f(x + size, y);
+    glVertex2f(x + size, y + size);
+    glVertex2f(x, y + size);
     glEnd();
 }
 
@@ -92,29 +14,33 @@ void display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
 
-    // Star 1 - Red
-    glColor3f(1.0, 0.0, 0.0);
-    drawStar(100, 300);
+    float size = 50;     // Size of each square
+    int flag = 0;       // For color switching
 
-    // Star 2 - Green
-    glColor3f(0.0, 1.0, 0.0);
-    drawStar(300, 300);
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            // Alternate the colors
+            if (flag == 0)
+                glColor3f(1.0, 1.0, 1.0);   // White
+            else
+                glColor3f(0.0, 0.0, 0.0);   // Black
 
-    // Star 3 - Blue
-    glColor3f(0.0, 0.0, 1.0);
-    drawStar(100, 100);
+            drawSquare(j * size, i * size, size);
 
-    // Star 4 - Yellow
-    glColor3f(1.0, 1.0, 0.0);
-    drawStar(300, 100);
+            flag = 1 - flag;   // Switch color
+        }
+        flag = 1 - flag;       // Switch at the end of each row
+    }
 
     glFlush();
 }
 
 void init()
 {
-    glClearColor(1.0, 1.0, 1.0, 1.0);
-    gluOrtho2D(0, 400, 0, 400);
+    glClearColor(0.7, 0.7, 0.7, 1.0);   // Light gray background
+    gluOrtho2D(0, 400, 0, 400);        // 8 × 50 = 400
 }
 
 int main(int argc, char** argv)
@@ -122,11 +48,126 @@ int main(int argc, char** argv)
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
     glutInitWindowSize(500, 500);
-    glutCreateWindow("Draw 4 Stars - OpenGL");
+    glutCreateWindow("Lab-3: 8x8 Chess Board");
+
     init();
     glutDisplayFunc(display);
     glutMainLoop();
+
     return 0;
+}*/
+
+#include<stdio.h>
+#include <GL/gl.h>
+#include <GL/glut.h>
+float x1,y1,x2,y2,m,i,j;
+float dx,dy;
+void display(void)
+{
+/* clear all pixels */
+glClear (GL_COLOR_BUFFER_BIT);
+/* draw white polygon (rectangle) with corners at
+* (0.25, 0.25, 0.0) and (0.75, 0.75, 0.0)
+*/
+glEnd();
+
+glColor3f (0.0, 1.0, 0.0);
+glBegin(GL_POINTS);
+//write your code here
+
+if(m>0 && m<=1)
+{
+while(x1<=x2 && y1<=y2)
+{
+    x1=x1+1;
+    y1=y1+m;
+    glVertex3f(x1/100,y1/100,0.0);
+   printf("%f %f",x1,y1);
+
+}
+}
+else if(m>1)
+{
+    while(x1<=x2 && y1<=y2)
+{
+    x1=x1+(1/m);
+    y1=y1+1;
+   glVertex3f(x1/100,y1/100,0.0);
+   printf("%f %f",x1,y1);
+}
 }
 
+else if(m>-1 && m<=0)
+{
+    while(x1>=x2 && y1>=y2)
+{
+    x1=x1-1;
+    y1=y1-m;
+   glVertex3f(x1/100,y1/100,0.0);
+   printf("%f %f",x1,y1);
+}
+}
+else if(m<-1)
 
+  {
+
+    while(x1>=x2 && y1>=y2)
+{
+    x1=x1-(1/m);
+    y1=y1-1;
+    glVertex3f(x1/100,y1/100,0.0);
+    printf("%f %f",x1,y1);
+}
+  }
+
+glEnd();
+
+
+/* don't wait!
+* start processing buffered OpenGL routines
+*/
+glFlush ();
+}
+void init (void)
+{
+/* select clearing (background) color */
+glClearColor (0.0, 0.0, 0.0, 0.0);
+/* initialize viewing values */
+glMatrixMode(GL_PROJECTION);
+glLoadIdentity();
+glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);
+}
+/*
+* Declare initial window size, position, and display mode
+* (single buffer and RGBA). Open window with "hello"
+* in its title bar. Call initialization routines.
+* Register callback function to display graphics.
+* Enter main loop and process events.
+*/
+int main(int argc, char** argv)
+{
+
+    //glVertex3f(x1/100,y1/100,0.0);write your code here
+    printf("Enter value of X1 :");
+    scanf("%f",&x1);
+    printf("Enter value of y1 :");
+    scanf("%f",&y1);
+    printf("Enter value of X2 :");
+    scanf("%f",&x2);
+    printf("Enter value of Y2 :");
+    scanf("%f",&y2);
+    dx=x2-x1;
+    dy=y2-y1;
+    m=dy/dx;
+
+
+glutInit(&argc, argv);
+glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
+glutInitWindowSize (500, 500);
+glutInitWindowPosition (100, 100);
+glutCreateWindow ("hello");
+init ();
+glutDisplayFunc(display);
+glutMainLoop();
+return 0; /* ISO C requires main to return int. */
+}
